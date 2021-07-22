@@ -8,30 +8,42 @@
 	<title>Sample Registration Page</title>
 </head>
 <body>
-	<form>
-		First Name: <input type='text'><br>
-		Last Name: <input type='text'><br>
-		Email: <input type='email' required><br>
-		Password: <input type='password' min=5><br>
-		Birthday: <input type='date'><br>
-		Gender: <br>
-		<input type='radio' name='gender'>Male<br>
-		<input type='radio' name='gender'>Female<br>
-		<input type='radio' name='gender'>Other<br>
-		Pets: <br>
-		<input type='checkbox'>Cat(s)<br>
-		<input type='checkbox'>Dog(s)<br>
-		<input type='checkbox'>Bird(s)<br>
-		<input type='checkbox'>None<br>
-		Cars: <br>
-		<select>
-			<option value='Honda'>Honda</option>
-			<option value='Toyota'>Toyota</option>
-			<option value='Other'>Other</option>
-			<option value='None'>None</option>
-		</select> <br>
-		<input type='submit' value='Register'>
-		<input type='reset'>
-	</form>
+	<!--- use GET instead of POST to reveal info as query string --->
+	<div>
+		<form method='GET'>
+			First Name: <input type='text' name='firstname' required><br>
+			Last Name: <input type='text' name='lastname' required><br>
+			Email: <input type='email' name='email' required><br>
+			Password: <input type='password' name='password' min=5><br>
+			Birthday: <input type='date' name='birthday'><br>
+			Gender: <br>
+			<input type='radio' name='gender' value='Male'>Male<br>
+			<input type='radio' name='gender' value='Female'>Female<br>
+			<input type='radio' name='gender' value='Other'>Other<br>
+			Pets: <br>
+			<input type='checkbox' name='cat'>Cat(s)<br>
+			<input type='checkbox' name='dog'>Dog(s)<br>
+			<input type='checkbox' name='bird'>Bird(s)<br>
+			<input type='checkbox' name='none'>None<br>
+			Cars: <br>
+			<select name='cars'>
+				<option value='Honda'>Honda</option>
+				<option value='Toyota'>Toyota</option>
+			</select> <br>
+			<input type='submit' value='Register'>
+			<input type='reset'>
+		</form>
+	</div>
 </body>
 </html>
+
+<!--- sample query string received from submission --->
+<br>
+?firstname=fake
+&lastname=man
+&email=f%40gmail.com
+&password=123
+&birthday=2021-06-27
+&gender=Male
+&cat=on
+&cars=Honda
