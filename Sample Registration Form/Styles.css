@@ -1,0 +1,45 @@
+/*Date: July 23, 2021*/
+/*Author: Terry Su*/
+/*Purpose: a CSS styling file for Sample Registration Form.html*/
+
+/*https://paletton.com/ for custom color picking*/
+/*https://fonts.google.com/ for font selection*/
+
+body {
+	background-image:  url(dewang-gupta-TMjcRQb0HAk-unsplash.jpg)
+}
+
+.title {
+	color: rgba(107, 8, 213, 100);
+	text-align: center;
+	text-decoration:  underline;
+	text-transform:  uppercase;
+	font-style: italic;
+	font-family: 'Zen Loop', cursive;
+	font-size: 120%;
+	text-align: center;
+	cursor: pointer ;
+}
+
+form:hover {
+	border: 2px solid black;
+}
+
+form {
+	font-family: 'Zen Loop', cursive;
+	font-weight:  bold;
+}
+
+.button {
+	font-weight: bold;
+	background-color: red;
+}
+
+#button_div {
+	line-height: 1000%;
+}
+
+footer {
+	clear: both;
+	text-align: center;
+}

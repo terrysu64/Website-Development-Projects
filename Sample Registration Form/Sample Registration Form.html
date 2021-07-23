@@ -1,0 +1,63 @@
+<!--- Date: July 21, 2021 --->
+<!--- Author: Terry Su --->
+<!--- Purpose: A sample registration form by using HTML form elements --->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sample Registration Form</title>
+	<link rel="stylesheet" type="text/css" href="Styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap" rel="stylesheet">
+</head>
+<body>
+	<!--- use GET instead of POST to reveal info as query string --->
+	<div class = title>
+		<h2>Sample Registration Form</h2>
+	</div>
+	<div>
+		<form method='GET'>
+			First Name: <input type='text' name='firstname' required><br>
+			Last Name: <input type='text' name='lastname' required><br>
+			Email: <input type='email' name='email' required><br>
+			Password: <input type='password' name='password' min=5><br>
+			Birthday: <input type='date' name='birthday'><br>
+			Gender: <br>
+			<input type='radio' name='gender' value='Male'>Male<br>
+			<input type='radio' name='gender' value='Female'>Female<br>
+			<input type='radio' name='gender' value='Other'>Other<br>
+			Pets: <br>
+			<input type='checkbox' name='cat'>Cat(s)<br>
+			<input type='checkbox' name='dog'>Dog(s)<br>
+			<input type='checkbox' name='bird'>Bird(s)<br>
+			<input type='checkbox' name='none'>None<br>
+			Cars: <br>
+			<select name='cars'>
+				<option value='Honda'>Honda</option>
+				<option value='Toyota'>Toyota</option>
+			</select> <br>
+			<input type='submit' value='Register'>
+			<input type='reset'>
+		</form>
+	</div><br><br>
+	<div id = button_div>
+		<a href="https://www.youtube.com/watch?v=bU-m_363k5w"><button type="button"><span class=button>CLICK AT YOUR OWN RISK!</span></button></a><img src='pig.jpg' height=40px width=40px>
+	</div>
+	<footer>Website made by Terry</footer>
+</body>
+</html>
+
+<!--- sample query string received from submission: --->
+
+<!-- 
+?firstname=fake
+&lastname=man
+&email=f%40gmail.com
+&password=123
+&birthday=2021-06-27
+&gender=Male
+&cat=on
+&cars=Honda 
+-->
+
