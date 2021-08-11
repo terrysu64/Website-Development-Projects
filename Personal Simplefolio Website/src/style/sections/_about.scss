@@ -37,6 +37,10 @@
       }
     }
 
+    .profile-pic:hover {
+      transform: scale(1.05);
+    }
+
     &__info {
       display: flex;
       height: 100%;
