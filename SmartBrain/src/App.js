@@ -30,8 +30,26 @@ class App extends Component {
     super();
     this.state = {
       'input': '',
-      'imageUrl': ''
+      'imageUrl': '',
+      'box': {}
     }
+  };
+
+  LocateFace = (data) => {
+    const face = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById('input-image');
+    const width = Number(image.width);
+    const height = Number(image.height);
+    return {
+      'top_row': face.top_row * height,
+      'bottom_row': (1-face.bottom_row) * height,
+      'left_col': face.left_col * width,
+      'right_col': (1-face.right_col) * width
+    };
+  };
+
+  FrameFace = (box) => {
+    this.setState({'box': box});
   };
 
   onInputChange = (event) => {
@@ -43,14 +61,8 @@ class App extends Component {
     app.models
       .predict(
         Clarifai.FACE_DETECT_MODEL,this.state.input) //use .input proprety instead of .imageUrl or else an error will arise 
-        .then(
-          function (response) {
-            console.log(response)
-          }, 
-          function (err) {
-            console.log(err)
-          }
-        );
+        .then(response => this.FrameFace(this.LocateFace(response)))
+        .catch(err => console.log(err))
   };
 
   render() {
@@ -61,7 +73,7 @@ class App extends Component {
         <Logo/>
         <Rank/>
         <ImageLink onInputChange={this.onInputChange} onSubmit={this.onSubmit}/>
-        <ImageBox imgUrl={this.state.imageUrl}/>
+        <ImageBox imgUrl={this.state.imageUrl} box={this.state.box}/>
       </div>
     )
   };
