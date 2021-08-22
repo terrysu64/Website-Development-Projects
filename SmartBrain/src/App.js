@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Clarifai from 'clarifai';
 import './App.css';
+import SignIn from './components/sign-in/sign-in';
+import Register from './components/register/register';
 import Navigation from './components/navigation/navigation';
 import Logo from './components/logo/logo';
 import ImageLink from './components/image-link/image-link';
@@ -31,8 +33,15 @@ class App extends Component {
     this.state = {
       'input': '',
       'imageUrl': '',
-      'box': {}
+      'box': {},
+      'page': 'signin',
+      'signedIn': false
     }
+  };
+
+  RouteChange = (route) => { //all "signedIn" state changes will occur at routeChange 
+    route === 'home' ? this.setState({'signedIn': true}) : this.setState({'signedIn': false})
+    this.setState({'page': route})
   };
 
   LocateFace = (data) => {
@@ -69,11 +78,19 @@ class App extends Component {
     return (
       <div className="App">
         <Particles className='particles' params={particlesOptions}/>
-        <Navigation/>
-        <Logo/>
-        <Rank/>
-        <ImageLink onInputChange={this.onInputChange} onSubmit={this.onSubmit}/>
-        <ImageBox imgUrl={this.state.imageUrl} box={this.state.box}/>
+        <Navigation SignedIn = {this.state.signedIn} RouteChange={this.RouteChange}/>
+        {this.state.page === 'home' 
+          ? <div>
+              <Logo/>
+              <Rank/>
+              <ImageLink onInputChange={this.onInputChange} onSubmit={this.onSubmit}/>
+              <ImageBox imgUrl={this.state.imageUrl} box={this.state.box}/>
+            </div>
+          : ( this.state.page === 'signin'
+                ? <SignIn RouteChange={this.RouteChange}/>
+                : <Register RouteChange={this.RouteChange}/>
+            )
+        }
       </div>
     )
   };
