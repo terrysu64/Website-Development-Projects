@@ -91,6 +91,17 @@ export default function initSr() {
     )
   );
 
+  ScrollReveal().reveal(
+    ".project-conc",
+    assignProps(
+      {
+        delay: 1000,
+        origin: window.innerWidth > 768 ? "bottom" : "bottom",
+      },
+      defaultProps
+    )
+  );
+
   /* Contact Section */
   ScrollReveal().reveal(
     ".contact-wrapper",
