@@ -14,17 +14,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const temp_data = {
-	'users': [
-		{
-			'id': '12345',
-			'name': 'Terry',
-			'email': 'terry@gmail.com',
-			'password': '1111',
-			'images': 0,
-			'joined': new Date()
-
-		}
-	]
+	'users': []
 };
 
 //ROUTE ENDPOINTS
