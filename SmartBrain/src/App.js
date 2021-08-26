@@ -35,8 +35,35 @@ class App extends Component {
       'imageUrl': '',
       'box': {},
       'page': 'signin',
-      'signedIn': false
+      'signedIn': false,
+      'user': {
+        'id': '',
+        'name': '',
+        'email': '',
+        'password': '',
+        'images': '',
+        'joined': ''
+      
+      }
     }
+  };
+
+  componentDidMount() {
+    fetch('http://localhost:3000/')
+    .then(console.log('server connected!'))
+  };
+
+  LoadUser = (data) => {
+    this.setState({'input': '','imageUrl': ''})
+    this.setState({'user': {
+      'id': data.id,
+      'name': data.name,
+      'email': data.email,
+      'password': data.password,
+      'images': data.images,
+      'joined': data.joined
+    }
+    });
   };
 
   RouteChange = (route) => { //all "signedIn" state changes will occur at routeChange 
@@ -61,17 +88,32 @@ class App extends Component {
     this.setState({'box': box});
   };
 
-  onInputChange = (event) => {
-    this.setState({'input': event.target.value});
-  };
-
   onSubmit = (event) => {
     this.setState({'imageUrl': this.state.input});
     app.models
       .predict(
         Clarifai.FACE_DETECT_MODEL,this.state.input) //use .input proprety instead of .imageUrl or else an error will arise 
-        .then(response => this.FrameFace(this.LocateFace(response)))
+        .then(response => {
+          if (response) {
+            fetch('http://localhost:3000/image', {
+              'method': 'post',
+              'headers': {'Content-Type': 'application/json'},
+              'body': JSON.stringify({
+                'id': this.state.user.id
+              })
+            })
+              .then(response => response.json())
+              .then(count => {
+                this.setState(Object.assign(this.state.user, { 'images': count}))
+              })
+          }
+          this.FrameFace(this.LocateFace(response))
+        })
         .catch(err => console.log(err))
+  };
+
+  onInputChange = (event) => {
+    this.setState({'input': event.target.value});
   };
 
   render() {
@@ -82,13 +124,13 @@ class App extends Component {
         {this.state.page === 'home' 
           ? <div>
               <Logo/>
-              <Rank/>
+              <Rank User={this.state.user}/>
               <ImageLink onInputChange={this.onInputChange} onSubmit={this.onSubmit}/>
               <ImageBox imgUrl={this.state.imageUrl} box={this.state.box}/>
             </div>
           : ( this.state.page === 'signin'
-                ? <SignIn RouteChange={this.RouteChange}/>
-                : <Register RouteChange={this.RouteChange}/>
+                ? <SignIn LoadUser={this.LoadUser} RouteChange={this.RouteChange}/>
+                : <Register LoadUser={this.LoadUser} RouteChange={this.RouteChange}/>
             )
         }
       </div>

@@ -1,13 +1,10 @@
 import React from 'react';
 
-const Rank = () => {
+const Rank = ({User}) => {
 	return (
     <div>
       <div className='white f3'>
-       Hi Terry, your current rank is...
-      </div>
-      <div className='white f1'>
-        #1 🥇
+       Hi {User.name}, you have had a total of {User.images.toString()} faces detected 📸
       </div>
     </div>
 	);

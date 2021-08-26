@@ -6,17 +6,23 @@
 
 import express from 'express';
 import bodyParser from "body-parser";
+import bcrypt from 'bcrypt-nodejs';
+import cors from 'cors';
 
 const app = express();
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(cors());
 
 const temp_data = {
 	'users': [
 		{
 			'id': '12345',
+			'name': 'Terry',
 			'email': 'terry@gmail.com',
 			'password': '1111',
-			'images': 0
+			'images': 0,
+			'joined': new Date()
+
 		}
 	]
 };
@@ -28,23 +34,25 @@ app.get('/', (req,res) => {
 });
 
 app.post('/signin', (req,res) => {
-	if (req.body.email === temp_data.users[0].email && 
-		req.body.password === temp_data.users[0].password) {
-		res.json('sucess!')
-	}
-	else {
-		res.status(400).json('cant log in')
+	for (let i = 0; i < temp_data.users.length; i++) {
+		if (temp_data.users[i].email === req.body.email &&
+			temp_data.users[i].password === req.body.password) {
+			return res.json(temp_data.users[i])
+		}
 	};
+	res.status(400).json('user does not exist')
 });
 
 app.post('/register', (req,res) => {
-	const {id, email, password} = req.body
+	const {name, email, password} = req.body
 	temp_data.users.push(
 		{
-			'id': id,
+			'id': '123',
+			'name': name,
 			'email': email,
 			'password': password,
-			'images': 0
+			'images': 0,
+			'joined': new Date()
 		
 		}
 	)
@@ -73,7 +81,7 @@ app.post('/image', (req,res) => {
 		if (user.id === id) {
 			found = true
 			user.images++
-			res.send(user)
+			res.json(user.images)
 			return
 		}
 	})
