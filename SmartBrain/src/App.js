@@ -63,7 +63,6 @@ class App extends Component {
       'password': data.password,
       'images': data.images,
       'joined': data.joined,
-      'used': data.used
     }
     });
   };
@@ -102,7 +101,6 @@ class App extends Component {
               'headers': {'Content-Type': 'application/json'},
               'body': JSON.stringify({
                 'id': this.state.user.id,
-                'url': this.state.imageUrl
               })
             })
               .then(response => response.json())
