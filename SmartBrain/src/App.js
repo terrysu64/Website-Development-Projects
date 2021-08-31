@@ -7,7 +7,8 @@ import Navigation from './components/navigation/navigation';
 import Logo from './components/logo/logo';
 import ImageLink from './components/image-link/image-link';
 import Rank from './components/rank/rank';
-import ImageBox from './components/image-box/image-box';
+import ImageBoxes from './components/image-box/image-boxes';
+import Image from './components/image/image';
 import Particles from 'react-particles-js';
 
 const app = new Clarifai.App({
@@ -55,7 +56,7 @@ class App extends Component {
   };
 
   LoadUser = (data) => {
-    this.setState({'input': '','imageUrl': ''})
+    this.setState({'input': '','imageUrl': '', 'box': {}})
     this.setState({'user': {
       'id': data.id,
       'name': data.name,
@@ -73,15 +74,15 @@ class App extends Component {
   };
 
   LocateFace = (data) => {
-    const face = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const face = data.outputs[0].data.regions.map(box => box.region_info.bounding_box);
     const image = document.getElementById('input-image');
     const width = Number(image.width);
     const height = Number(image.height);
     return {
-      'top_row': face.top_row * height,
-      'bottom_row': (1-face.bottom_row) * height,
-      'left_col': face.left_col * width,
-      'right_col': (1-face.right_col) * width
+      'top_row': face.map(face => face.top_row * height),
+      'bottom_row': face.map(face => (1-face.bottom_row) * height),
+      'left_col': face.map(face => face.left_col * width),
+      'right_col': face.map(face => (1-face.right_col) * width)
     };
   };
 
@@ -101,6 +102,7 @@ class App extends Component {
               'headers': {'Content-Type': 'application/json'},
               'body': JSON.stringify({
                 'id': this.state.user.id,
+                'faces': response.outputs[0].data.regions.length
               })
             })
               .then(response => response.json())
@@ -127,7 +129,8 @@ class App extends Component {
               <Logo/>
               <Rank User={this.state.user}/>
               <ImageLink onInputChange={this.onInputChange} onSubmit={this.onSubmit}/>
-              <ImageBox imgUrl={this.state.imageUrl} box={this.state.box}/>
+              <Image imgUrl={this.state.imageUrl}/>
+              <ImageBoxes imgUrl={this.state.imageUrl} boxes={this.state.box}/>
             </div>
           : ( this.state.page === 'signin'
                 ? <SignIn LoadUser={this.LoadUser} RouteChange={this.RouteChange}/>

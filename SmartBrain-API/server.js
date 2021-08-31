@@ -2,8 +2,6 @@
 //Author: Terry Su
 //Purpose: Back-end express.js server for SmartBrain appplication
 
-//currently under testing stages with PostMan, and shifting database to PostgreSQL
-
 import express from 'express';
 import bodyParser from "body-parser";
 import bcrypt from 'bcrypt-nodejs';
@@ -31,7 +29,6 @@ const temp_data = {
 
 //ROUTE ENDPOINTS
 
-//UPDATED
 app.get('/', (req,res) => {
 	db('users')
 		.returning('*')
@@ -40,34 +37,54 @@ app.get('/', (req,res) => {
 		})
 });
 
-//needs update
 app.post('/signin', (req,res) => {
-	for (let i = 0; i < temp_data.users.length; i++) {
-		if (temp_data.users[i].email === req.body.email &&
-			temp_data.users[i].password === req.body.password) {
-			return res.json(temp_data.users[i])
-		}
-	};
-	res.status(400).json('user does not exist')
+	db.select('email', 'hash').from('login')
+		.where('email', '=', req.body.email)
+		.then(data => {
+			const valid = bcrypt.compareSync(req.body.password, data[0].hash);
+			if (valid) {
+				return db.select('*').from('users')
+					.where('email', '=', req.body.email)
+					.then(user => {
+						res.json(user[0])
+					})
+					.catch(err => res.status(400).json('unable to retreive user'))
+			}
+			else {
+				res.status(400).json('credentials not found')
+			}
+		})
+		.catch(err => res.status(400).json('crendentials not found'))
 });
 
-//UPDATED
 app.post('/register', (req,res) => {
 	const {name, email, password} = req.body
-	db('users')
-		.returning('*')
-		.insert({
-			'email': email,
-			'name': name,
-			'joined': new Date()
+	const hash = bcrypt.hashSync(password)
+	db.transaction(trx => {
+		trx.insert({
+			'hash': hash,
+			'email': email
 		})
-		.then(user => {
-			res.json(user[0])
+		.into('login')
+		.returning('email')
+		.then(loginEmail => {
+			return trx('users')
+			.returning('*')
+			.insert({
+				'email': email,
+				'name': name,
+				'joined': new Date()
+			})
+			.then(user => {
+				res.json(user[0])
+			})
 		})
-		.catch(err => res.status(400).json('Registration Error'))
+		.then(trx.commit)
+		.catch(trx.rollback)
+	})
+	.catch(err => res.status(400).json('Registration Error'))
 });
 
-//UPDATED
 app.get('/profile/:id', (req,res) => {
 	const { id } = req.params
 	db.select('*').from('users').where({id})
@@ -81,11 +98,10 @@ app.get('/profile/:id', (req,res) => {
 		})
 });
 
-//UPDATED
 app.post('/image', (req,res) => {
-	const { id } = req.body
+	const { id, faces } = req.body
 	db('users').where('id', '=', id)
-	.increment('images', 1)
+	.increment('images', faces)
 	.returning('images')
 	.then(entries => {
 		res.json(entries[0]);

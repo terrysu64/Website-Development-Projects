@@ -28,7 +28,7 @@ class SignIn extends React.Component {
      })
      .then(response => response.json())
      .then(data => {
-       if (data != 'user does not exist') {
+       if (typeof data != "string") {
          this.props.LoadUser(data);
          this.props.RouteChange('home')
        };
