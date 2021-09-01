@@ -23,9 +23,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const temp_data = {
-	'users': []
-};
 
 //ROUTE ENDPOINTS
 
@@ -35,6 +32,39 @@ app.get('/', (req,res) => {
 		.then(users => {
 			res.json(users)
 		})
+});
+
+app.post('/register', (req,res) => {
+	const {name, email, password} = req.body
+	const hash = bcrypt.hashSync(password)
+	if (name && validator.validate(email) && password) {
+		db.transaction(trx => {
+			trx.insert({
+				'hash': hash,
+				'email': email.toLowerCase()
+			})
+			.into('login')
+			.returning('email')
+			.then(loginEmail => {
+				return trx('users')
+				.returning('*')
+				.insert({
+					'email': email.toLowerCase(),
+					'name': name,
+					'joined': new Date()
+				})
+				.then(user => {
+					res.json(user[0])
+				})
+			})
+			.then(trx.commit)
+			.catch(trx.rollback)
+		})
+		.catch(err => res.status(400).json('Registration Error'))
+	}
+	else {
+		res.status(400).json('Missing Credentials')
+	}
 });
 
 app.post('/signin', (req,res) => {
@@ -55,34 +85,6 @@ app.post('/signin', (req,res) => {
 			}
 		})
 		.catch(err => res.status(400).json('crendentials not found'))
-});
-
-app.post('/register', (req,res) => {
-	const {name, email, password} = req.body
-	const hash = bcrypt.hashSync(password)
-	db.transaction(trx => {
-		trx.insert({
-			'hash': hash,
-			'email': email
-		})
-		.into('login')
-		.returning('email')
-		.then(loginEmail => {
-			return trx('users')
-			.returning('*')
-			.insert({
-				'email': email,
-				'name': name,
-				'joined': new Date()
-			})
-			.then(user => {
-				res.json(user[0])
-			})
-		})
-		.then(trx.commit)
-		.catch(trx.rollback)
-	})
-	.catch(err => res.status(400).json('Registration Error'))
 });
 
 app.get('/profile/:id', (req,res) => {

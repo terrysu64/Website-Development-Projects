@@ -96,7 +96,7 @@ class App extends Component {
       .predict(
         Clarifai.FACE_DETECT_MODEL,this.state.input) //use .input proprety instead of .imageUrl or else an error will arise 
         .then(response => {
-          if (response) {
+          if (response.outputs[0].data.regions != undefined) {
             fetch('http://localhost:3000/image', {
               'method': 'post',
               'headers': {'Content-Type': 'application/json'},
@@ -105,12 +105,16 @@ class App extends Component {
                 'faces': response.outputs[0].data.regions.length
               })
             })
+            .catch(console.log)
               .then(response => response.json())
               .then(count => {
                 this.setState(Object.assign(this.state.user, { 'images': count}))
               })
+            this.FrameFace(this.LocateFace(response))
           }
-          this.FrameFace(this.LocateFace(response))
+          else {
+            this.FrameFace({})
+          }
         })
         .catch(err => console.log(err))
   };
