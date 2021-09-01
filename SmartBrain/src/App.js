@@ -96,7 +96,7 @@ class App extends Component {
       .predict(
         Clarifai.FACE_DETECT_MODEL,this.state.input) //use .input proprety instead of .imageUrl or else an error will arise 
         .then(response => {
-          if (response.outputs[0].data.regions != undefined) {
+          if (!(response.outputs[0].data.regions === undefined)) {
             fetch('http://localhost:3000/image', {
               'method': 'post',
               'headers': {'Content-Type': 'application/json'},
