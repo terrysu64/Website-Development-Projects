@@ -1,7 +1,7 @@
 .navigation {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	background: linear-gradient(315deg, #63a4ff 0%, #83eaf1 70%);; 
+	background: linear-gradient(315deg, #63a4ff 0%, #83eaf1 70%); 
 	align-items: center;
 	border: 5px solid #bbb;
 }
@@ -35,12 +35,12 @@
 	align-self: center;
 }
 
-p {
+#title-text {
 	font-family: Impact,Haettenschweiler,Franklin Gothic Bold,Charcoal,Helvetica Inserat,Bitstream Vera Sans Bold,Arial Black,sans serif; 
 	font-size: 28px;
 	color: #000099;
 }
 
-p:hover {
+#title-text:hover {
 	transform: scale(1.2);
 }

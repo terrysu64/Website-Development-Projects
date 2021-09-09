@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navigation from './components/navigation/navigation';
+import InputBox from './components/inputBox/inputBox';
 import './App.css';
 
 class App extends Component {
@@ -15,7 +16,8 @@ class App extends Component {
   render() {
     return (
       <div className='app'>
-        <Navigation/>
+        <Navigation/> {/*sticky element*/}
+        <InputBox/>
       </div>
     )
   };
