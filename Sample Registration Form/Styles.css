@@ -5,8 +5,14 @@
 /*https://paletton.com/ for custom color picking*/
 /*https://fonts.google.com/ for font selection*/
 
+body, html {
+  height: 100%;
+}
+
 body {
-	background-image:  url(dewang-gupta-TMjcRQb0HAk-unsplash.jpg)
+	background-image: url(http://www.yrdsb.ca/schools/millikenmills.hs/info/PublishingImages/MMHS-Photo-Banner-Cleaned-640.jpg);
+	height: 100%;
+	background-size: cover;
 }
 
 .title {
