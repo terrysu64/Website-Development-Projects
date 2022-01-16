@@ -18,8 +18,8 @@ body {
 .title {
 	color: rgba(107, 8, 213, 100);
 	text-align: center;
-	text-decoration:  underline;
-	text-transform:  uppercase;
+	text-decoration: underline;
+	text-transform: uppercase;
 	font-style: italic;
 	font-family: 'Zen Loop', cursive;
 	font-size: 120%;

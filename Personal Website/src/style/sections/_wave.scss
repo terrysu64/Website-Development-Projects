@@ -1,0 +1,11 @@
+#gradient-canvas {
+	min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    position: absolute;
+    z-index: 0;
+    --gradient-color-1: #F6F8F8;
+    --gradient-color-2: #D9F0F3;
+    --gradient-color-3: #C4E9EE;
+    --gradient-color-4: #B1E6EC;
+}

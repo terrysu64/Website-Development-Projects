@@ -12,11 +12,7 @@
   top: 0;
   left: 0;
   bottom: 0;
-  right: 0;
-  z-index: -1;
-  background: url("/src/assets/project.jpg");
-  background-position: center;
-  background-size: cover; 
+  right: 0; 
   @include respond(phone) {
     padding: 0rem $default-font-size;
   }
