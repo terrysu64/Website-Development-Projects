@@ -49,7 +49,7 @@
               <!-- DEFAULT SINGLE IMAGE FORMAT -->
               <!-- <img
                 alt="Profile Image"
-                class="img-fluid rounded shadow-lg profile-pic" (make sure to change CSS carousel class for hover effect if you use this format)
+                class="img-fluid-custom rounded shadow-lg profile-pic" (make sure to change CSS carousel class for hover effect if you use this format)
                 height="auto"
                 width="300px"
                 src="assets/profile.jpeg"
@@ -59,27 +59,27 @@
               <!-- NPM CAROUSEL FORMAT -->
               <div class='carousel' style="width:300px; height:400px" data-simple-slider>
                 <img 
-                  class="img-fluid rounded shadow-lg enlarge" 
+                  class="img-fluid-custom rounded shadow-lg enlarge" 
                   src="assets/profile.jpg" 
                   alt="Profile Image"
                 />
                 <img 
-                  class="img-fluid rounded shadow-lg" 
+                  class="img-fluid-custom rounded shadow-lg" 
                   src="assets/profile2.jpg" 
                   alt="Profile Image"
                 />
                 <img 
-                  class="img-fluid rounded shadow-lg" 
+                  class="img-fluid-custom rounded shadow-lg" 
                   src="assets/profile3.jpeg" 
                   alt="Profile Image"
                 />
                 <img 
-                  class="img-fluid rounded shadow-lg enlarge" 
+                  class="img-fluid-custom rounded shadow-lg enlarge" 
                   src="assets/profile4.jpeg" 
                   alt="Profile Image"
                 />
                 <img 
-                  class="img-fluid rounded shadow-lg" 
+                  class="img-fluid-custom rounded shadow-lg" 
                   src="assets/profile5.jpeg" 
                   alt="Profile Image"
                 />
@@ -135,6 +135,48 @@
           <div class="row">
             <div class="col-lg-4 col-sm-12">
               <div class="project-wrapper__text">
+                <h3 class="project-wrapper__text-title">GoodEats</h3>
+                <div>
+                  <p class="mb-4">
+                    As an avid gastronome, GoodEats was built out of my passion for exploring new foods to potentially try from various cultures. Users can easily surf, and keep track of, their favourite restaurants from corners of the world without feeling any obligation to make a purchase. On the technical side, GoodEats was built with React Native and Firebase; most features of the app were facilitated with packages from the Expo toolchain. However, as most restaurant data is currently sourced artificially, I hope to scale GoodEats and make use of the Google Maps API in the near future! 
+                  </p>
+                </div>
+                <a
+                  rel="noreferrer"
+                  target="_blank"
+                  class="cta-btn cta-btn--hero"
+                  href="https://expo.dev/@terrysu64/GoodEats?serviceType=classic&distribution=expo-go"
+                >
+                  See Live
+                </a>
+                <a
+                  rel="noreferrer"
+                  target="_blank"
+                  class="cta-btn text-color-main"
+                  href="https://github.com/terrysu64/Mobile-Development-Projects/tree/main/GoodEats"
+                >
+                  Source Code
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-8 col-sm-12">
+              <div class="project-wrapper__image">
+                <div data-tilt class="thumbnail rounded js-tilt">
+                  <img
+                    alt="Project Image"
+                    class="img-fluid-custom"
+                    src="assets/goodeats.jpeg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /END Project -->
+
+          <!-- Each .row is a project -->
+          <div class="row">
+            <div class="col-lg-4 col-sm-12">
+              <div class="project-wrapper__text">
                 <h3 class="project-wrapper__text-title">Gamble Bot</h3>
                 <div>
                   <p class="mb-4">
@@ -164,7 +206,7 @@
                 <div data-tilt class="thumbnail rounded js-tilt">
                   <img
                     alt="Project Image"
-                    class="img-fluid"
+                    class="img-fluid-custom"
                     src="assets/discord.v1.jpg"
                   />
                 </div>
@@ -203,8 +245,51 @@
                   <div data-tilt class="thumbnail rounded js-tilt">
                     <img
                       alt="Project Image"
-                      class="img-fluid"
+                      class="img-fluid-custom"
                       src="assets/pearpals.png"
+                    />
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- /END Project -->
+
+          <!-- Each .row is a project -->
+          <div class="row">
+            <div class="col-lg-4 col-sm-12">
+              <div class="project-wrapper__text">
+                <h3 class="project-wrapper__text-title">QuickFocus</h3>
+                <div>
+                  <p class="mb-4">
+                    In light of the productivity painpoints that many have faced throughout the pandemic, I designed QuickFocus, a minimalist pomodoro study app. Specifically, I used React Native to acheive various cross-platform functionalities through importing pre-built and custom components of my own. QuickFocus further allowed me in exploring the various features of the framework used, such as building an asynchronous storage system. Feel free to check it out through scanning my Expo QR code!
+                  </p>
+                </div>
+                <a
+                  rel="noreferrer"
+                  target="_blank"
+                  class="cta-btn cta-btn--hero"
+                  href="https://snack.expo.dev/@terrysu64/quickfocus"
+                >
+                  See Live
+                </a>
+                <a
+                  rel="noreferrer"
+                  target="_blank"
+                  class="cta-btn text-color-main"
+                  href="https://github.com/terrysu64/Mobile-Development-Projects/tree/main/QuickFocus"
+                >
+                  Source Code
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-8 col-sm-12">
+              <div class="project-wrapper__image">
+                <div data-tilt class="thumbnail rounded js-tilt">
+                  <img
+                      alt="Project Image"
+                      class="img-fluid-custom"
+                      src="assets/quickfocus.png"
                     />
                   </div>
                 </a>
@@ -246,7 +331,7 @@
                 <div data-tilt class="thumbnail rounded js-tilt">
                   <img
                       alt="Project Image"
-                      class="img-fluid"
+                      class="img-fluid-custom"
                       src="assets/smartbrain.png"
                     />
                   </div>
@@ -289,7 +374,7 @@
                 <div data-tilt class="thumbnail rounded js-tilt">
                   <img
                     alt="Project Image"
-                    class="img-fluid"
+                    class="img-fluid-custom"
                     src="assets/layout.png"
                   />
                 </div>
@@ -297,6 +382,7 @@
             </div>
           </div>
           <!-- /END Project -->
+
         <div class='project-conc github'>
           <img alt='github' src='./assets/github.png' height=30px width=30px/>
           <div>

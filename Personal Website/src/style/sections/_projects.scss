@@ -112,8 +112,14 @@
           border: 1px solid $light-grey;
           box-shadow: none;
           margin-bottom: 3.2rem;
-        }
-      }
-    }
-  }
-}
+        };
+      };
+    };
+  };
+};
+
+.img-fluid-custom {
+  max-width: 100%;
+  height: auto;
+  max-height: 430px;
+};
