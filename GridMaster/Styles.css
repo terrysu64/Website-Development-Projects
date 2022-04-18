@@ -11,14 +11,10 @@ h1 {
 .container {
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
-    grid-template-rows: 1fr 2fr;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 1fr;
     align-items: end;  /*vertical adjustment*/
     justify-items: stretch; /*horizontal adjustment*/
-}
-
-.green {
-    grid-column: span 2;
 }
 
 .zone {
