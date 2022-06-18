@@ -11,3 +11,4 @@ export default function initApp() {
   var gradient = new Gradient();
   gradient.initGradient('#gradient-canvas');
 }
+ 
