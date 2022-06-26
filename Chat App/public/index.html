@@ -10,7 +10,22 @@
 
 <body>
     <div class="namespaces"></div>
+    <div><b>rooms</b></div>
+    <div>
+        <ul class="room-list"></ul>
+    </div>
+    <h4 class="room-members"></h4>
+    <h3>messages</h3>
+    <div>
+        <form id="msg-form">
+            <input id="msg-input" type="text" placeholder="type message in here">
+            <input type="submit" value="send message"/>
+        </form>
+        <ul id="msg-list"></ul>
+    </div>
 </body>
 
 <script src="http://localhost:3001/socket.io/socket.io.js"></script>
 <script src="./scripts.js"></script>
+<script src="./join-ns.js"></script>
+<script src="./join-room.js"></script>

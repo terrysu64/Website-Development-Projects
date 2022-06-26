@@ -19,9 +19,24 @@ io.on('connection', (socket) => {
 })
 
 namespaces.forEach((namespace) => {
+
     io.of(namespace.endpoint).on("connection", (socket) => {
         console.log(`${socket.id} has joined ${namespace.endpoint}`)
+        socket.emit('nsRoomLoad',namespaces[0].rooms)
+        
+        socket.on('joinRoom', (room,memberCntCallback) => {
+            socket.join(room)
+            const clients = io._nsps.get('/wiki').adapter.rooms.get(room).size
+            memberCntCallback(clients)
+        })
+
+        socket.on('newMsg',(msg) => {
+            const roomTitle = Array.from(socket.rooms)[1]
+            io.of('/wiki').to(roomTitle).emit('newMsgClient',msg)
+        })
+
     })
+
 });
 
 
