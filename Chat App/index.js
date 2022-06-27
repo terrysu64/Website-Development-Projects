@@ -22,17 +22,38 @@ namespaces.forEach((namespace) => {
 
     io.of(namespace.endpoint).on("connection", (socket) => {
         console.log(`${socket.id} has joined ${namespace.endpoint}`)
-        socket.emit('nsRoomLoad',namespaces[0].rooms)
+        socket.emit('nsRoomLoad',namespace.rooms)
         
         socket.on('joinRoom', (room,memberCntCallback) => {
+
+            const roomTitle = Array.from(socket.rooms)[1]
+            if (roomTitle!==undefined) {
+                socket.leave(roomTitle)
+                const prevClients = io._nsps.get(namespace.endpoint).adapter.rooms.get(roomTitle)
+                if (prevClients!==undefined) {
+                    io.of(namespace.endpoint).in(roomTitle).emit('memberCntUpdate', prevClients.size)
+                }
+                
+            }
+
             socket.join(room)
-            const clients = io._nsps.get('/wiki').adapter.rooms.get(room).size
+            const clients = io._nsps.get(namespace.endpoint).adapter.rooms.get(room).size
             memberCntCallback(clients)
+            const nsRoom = namespace.rooms.find((nsrooms) => {
+                return nsrooms.roomTitle === room
+            })
+            
+            socket.emit('loadHistory', nsRoom.history)
+            io.of(namespace.endpoint).in(room).emit('memberCntUpdate', clients)
         })
 
         socket.on('newMsg',(msg) => {
             const roomTitle = Array.from(socket.rooms)[1]
-            io.of('/wiki').to(roomTitle).emit('newMsgClient',msg)
+            const nsRoom = namespace.rooms.find((room) => {
+                return room.roomTitle === roomTitle
+            })
+            nsRoom.addMsg(msg)
+            io.of(namespace.endpoint).to(roomTitle).emit('loadHistory',nsRoom.history) //temporary fix bad time complexity
         })
 
     })
@@ -40,9 +61,3 @@ namespaces.forEach((namespace) => {
 });
 
 
-
-// io.of('/').on("connection", (socket,req) => {
-//     socket.on('newMsg',(msg) => {
-//         io.of('/').emit('newMsgEveryone',msg) // just main namespace
-//     })
-// }); 
