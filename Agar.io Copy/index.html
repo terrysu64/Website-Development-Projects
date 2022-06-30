@@ -18,11 +18,11 @@
 				<!-- main game -->
 			</canvas>
 			<div id="score-wrapper" class="hiddenOnStart" hidden>
-				<div>Score: <span class="player-score"></span></div>
+				<div class="game-font2">Score: <span class="player-score"></span></div>
 			</div>
 			<div id="leader-board-wrapper" class="hiddenOnStart" hidden>
 				<div id="leader-board">
-					<h3 class="text-center">Leaders</h3>
+					<h3 class="text-center game-font2">Leaders</h3>
 					<hr>
 					<ol class="leader-board">
 						<li class="leaderboard-player"></li>
@@ -30,14 +30,14 @@
 					<hr>
 				</div>
 				<div id="sort-wrapper">
-					<div id="sort-header" class="text-center">SORT BY</div>
-					<div id="sort-score" class="sort-option active">Score</div>
-					<div id="sort-orbs" class="sort-option">Orbs</div>
-					<div id="sort-players" class="sort-option">Players</div>
+					<div id="sort-header game-font2" class="text-center">Rank by</div>
+					<div id="sort-score game-font2" class="sort-option active">Score</div>
+					<div id="sort-orbs game-font2" class="sort-option">Orbs</div>
+					<div id="sort-players game-font2" class="sort-option">Players</div>
 				</div>
 			</div>
 			<div id="game-message-wrapper">
-				<div id="game-message">{{gameMessage}}</div>
+				<div id="game-message game-font2">{{gameMessage}}</div>
 			</div>
 		</div>
 		
@@ -45,7 +45,7 @@
 
 	<!-- Modals -->
 <!-- LOGIN MODAL -->
-	<div id="loginModal" class="modal fade" role="dialog">
+	<div id="loginModal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
 		<div class="modal-dialog modal-sm">
 
 		<!-- Modal content-->
@@ -67,7 +67,7 @@
 	</div>
 
 <!-- START MODAL -->
-	<div id="spawnModal" class="modal fade" role="dialog">
+	<div id="spawnModal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
 		<div class="modal-dialog modal-sm">
 
 		<!-- Modal content-->
@@ -90,5 +90,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <script src="ui-query.js"></script>
+	<script src="canvas.js"></script>
 </body>
 </html>

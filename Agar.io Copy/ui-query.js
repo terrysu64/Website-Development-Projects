@@ -8,13 +8,13 @@ canvas.width = wWidth
 canvas.height = wHeight
 
 $(window).load(() => {
+  // $("#loginModal").modal({ backdrop: "static ", keyboard: false });
   $('#loginModal').modal('show')
 })
 
 $('.name-form').submit((event) => {
   event.preventDefault()
   player.name = document.querySelector('#name-input').value
-  console.log(player.name)
   $('#loginModal').modal('hide')
   $('#spawnModal').modal('show')
   document.querySelector('.player-name').innerHTML = player.name
@@ -23,5 +23,5 @@ $('.name-form').submit((event) => {
 $('.start-game').click((event) => {
   $('.modal').modal('hide')
   $('.hiddenOnStart').removeAttr('hidden')
-  //init()
+  init()
 })
