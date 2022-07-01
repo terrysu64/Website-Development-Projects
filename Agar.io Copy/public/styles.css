@@ -111,6 +111,13 @@ canvas{
 	color: #FFFFFF;
 }
 
+.btn-guest {
+	background-image: url("/images/Profile-PNG-Clipart.png") !important;
+	background-repeat: no-repeat;
+	background-position: 10px;
+	background-size: 35px 35px;
+}
+
 #join-team-btn, #play-solo-btn, #create-team-btn, #create-play-solo-btn, #add-team-btn{
 	width: 48%;
 	margin: 5px auto 15px;
@@ -128,9 +135,9 @@ canvas{
 	background-image: url("/images/GitHub-Mark-Light-32px.png") !important;
 	color: #fff;
     background-color: #444;
-	border-color: rgba(0,0,0,0.2);
+	border-color: rgba(0,0,0,0.2); 
 	background-repeat: no-repeat;
-	background-position: 5px;
+	background-position: 10px;
 }
 .btn-github:hover{
 	color: rgba(200,200,200,0.5);

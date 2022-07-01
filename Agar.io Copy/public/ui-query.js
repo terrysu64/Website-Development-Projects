@@ -1,6 +1,7 @@
 const wHeight = $(window).height()
 const wWidth = $(window).width()
 const player = {}
+let orbs = []
 
 const canvas = document.querySelector('#the-canvas')
 const context = canvas.getContext('2d')

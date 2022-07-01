@@ -55,10 +55,10 @@
 					<h2 class="modal-title text-center game-font">Terry's Agar.io</h2>
 				</div>
 				<div class="modal-body">
-						<button type="submit" class="btn play-button btn-github game-font2">Login with Github</button>
+					<button type="submit" class="btn play-button btn-github game-font2">Login with Github</button>
 					<form class="name-form">
 						<div class="text-center error-message"></div>
-						<button type="submit" class="btn play-button play-guest game-font2">Play as Guest</button>
+						<button type="submit" class="btn play-button btn-guest play-guest game-font2">Play as Guest</button>
 						<input id="name-input" class="text-input text-center form-control game-font2" type="text" name="name-input" placeholder="Enter your name here" required>
 					</form>
 				</div>
@@ -87,9 +87,11 @@
 		</div>
 	</div>
 
+	<script src="http://localhost:3001/socket.io/socket.io.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <script src="ui-query.js"></script>
 	<script src="canvas.js"></script>
+	<script src="socket.js"></script>
 </body>
 </html>
