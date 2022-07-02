@@ -1,7 +1,9 @@
 const wHeight = $(window).height()
 const wWidth = $(window).width()
+
 const player = {}
 let orbs = []
+let players = []
 
 const canvas = document.querySelector('#the-canvas')
 const context = canvas.getContext('2d')
@@ -16,7 +18,7 @@ $(window).load(() => {
 $('.name-form').submit((event) => {
   event.preventDefault()
   player.name = document.querySelector('#name-input').value
-  $('#loginModal').modal('hide')
+  $('#loginModal').modal('hide') 
   $('#spawnModal').modal('show')
   document.querySelector('.player-name').innerHTML = player.name
 })

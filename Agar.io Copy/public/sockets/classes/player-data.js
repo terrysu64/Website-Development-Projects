@@ -1,10 +1,14 @@
-class Orb {
+//data all sockets need to know
+
+class PlayerData {
   
-  constructor(settings) {
-    this.color = this.getRandomColor()
+  constructor(username="terrysu64", settings) {
+    this.name=username
     this.locX = Math.floor(Math.random()*settings.worldWidth)
     this.locY = Math.floor(Math.random()*settings.worldHeight)
-    this.radius = Math.floor(Math.random()*5+1)
+    this.radius = settings.size
+    this.color = this.getRandomColor()
+    this.score = 0
   }
 
   getRandomColor() {
@@ -15,4 +19,4 @@ class Orb {
   }
 }
 
-export default Orb
+export default PlayerData
