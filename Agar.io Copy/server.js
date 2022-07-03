@@ -63,17 +63,22 @@ io.on("connection", (socket) => {
 
   socket.on("clientDataUpdate", (data) => {
     const speed = player.playerConfig.speed
-    const xV = player.playerConfig.xVector = data.xV
-    const yV = player.playerConfig.yVector = data.yV
+    const xV = data.xV
+    const yV = data.yV
+    player.playerConfig.xVector = data.xV
+    player.playerConfig.yVector = data.yV
 
-    if ((player.playerData.locX < 5 && player.playerData.xVector < 0) || (player.playerData.locX > 500) && (xV > 0)) {
+    if  (xV !== undefined && yV !== undefined) { //only initialized after mouse moves (creates lag and could crash game)
+      if ((player.playerData.locX < 5 && xV < 0) || (player.playerData.locX > 500) && (xV > 0)) {
         player.playerData.locY -= speed * yV;
-    } else if ((player.playerData.locY < 5 && yV > 0) || (player.playerData.locY > 500) && (yV < 0)) {
-        player.playerData.locX += speed * xV;
-    } else {
-        player.playerData.locX += speed * xV;
-        player.playerData.locY -= speed * yV;
-    }  
+      } else if ((player.playerData.locY < 5 && yV > 0) || (player.playerData.locY > 500) && (yV < 0)) {
+          player.playerData.locX += speed * xV;
+      } else {
+          player.playerData.locX += speed * xV;
+          player.playerData.locY -= speed * yV;
+      }
+    }
+
   })
 
 })
