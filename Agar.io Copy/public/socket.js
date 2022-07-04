@@ -23,4 +23,8 @@ socket.on("dataUpdate", (data) => {
   player.locY = data.playerY
 })
 
+socket.on("orbCollision", (data) => {
+  console.log(data)
+})
+
  

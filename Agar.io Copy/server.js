@@ -6,6 +6,7 @@ import Orb from "./public/sockets/classes/orb.js"
 import Player from './public/sockets/classes/player.js';
 import PlayerConfig from './public/sockets/classes/player-config.js';
 import PlayerData from './public/sockets/classes/player-data.js';
+import { CheckOrbCollision, CheckPlayerCollisions } from './collisions.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -68,7 +69,7 @@ io.on("connection", (socket) => {
     player.playerConfig.xVector = data.xV
     player.playerConfig.yVector = data.yV
 
-    if  (xV !== undefined && yV !== undefined) { //only initialized after mouse moves (creates lag and could crash game)
+    if (xV !== undefined && yV !== undefined) { //only initialized after mouse moves (creates lag and could crash game)
       if ((player.playerData.locX < 5 && xV < 0) || (player.playerData.locX > 500) && (xV > 0)) {
         player.playerData.locY -= speed * yV;
       } else if ((player.playerData.locY < 5 && yV > 0) || (player.playerData.locY > 500) && (yV < 0)) {
@@ -78,6 +79,16 @@ io.on("connection", (socket) => {
           player.playerData.locY -= speed * yV;
       }
     }
+
+    CheckOrbCollision(player.playerData, player.playerConfig, orbs, defaultSettings)
+      .then((data) => {
+        const orbData = {
+          orbIdx: data,
+          newOrb: orbs[data]
+        }
+        console.log(orbData)
+        io.emit("orbCollision", {orbData})
+      }) .catch(() => null)
 
   })
 
