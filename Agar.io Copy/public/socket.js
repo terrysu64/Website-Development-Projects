@@ -24,7 +24,7 @@ socket.on("dataUpdate", (data) => {
 })
 
 socket.on("orbCollision", (data) => {
-  console.log(data)
+  orbs.splice(data.orbIdx,1,data.newOrb)
 })
 
  

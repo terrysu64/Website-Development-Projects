@@ -19,12 +19,12 @@ const expressServer = app.listen(3001, () => console.log("server running on 3001
 export const io = new Server(expressServer);
 
 const defaultSettings = {
-  orbs: 100,
+  orbs: 4000,
   speed: 5,
   size: 6,
   zoom: 1.5,
-  worldWidth: 500,
-  worldHeight: 500
+  worldWidth: 5000,
+  worldHeight: 5000,
 }
 
 const players = []
@@ -70,9 +70,9 @@ io.on("connection", (socket) => {
     player.playerConfig.yVector = data.yV
 
     if (xV !== undefined && yV !== undefined) { //only initialized after mouse moves (creates lag and could crash game)
-      if ((player.playerData.locX < 5 && xV < 0) || (player.playerData.locX > 500) && (xV > 0)) {
+      if ((player.playerData.locX < 5 && xV < 0) || (player.playerData.locX > defaultSettings.worldWidth) && (xV > 0)) {
         player.playerData.locY -= speed * yV;
-      } else if ((player.playerData.locY < 5 && yV > 0) || (player.playerData.locY > 500) && (yV < 0)) {
+      } else if ((player.playerData.locY < 5 && yV > 0) || (player.playerData.locY > defaultSettings.worldHeight) && (yV < 0)) {
           player.playerData.locX += speed * xV;
       } else {
           player.playerData.locX += speed * xV;
@@ -86,8 +86,7 @@ io.on("connection", (socket) => {
           orbIdx: data,
           newOrb: orbs[data]
         }
-        console.log(orbData)
-        io.emit("orbCollision", {orbData})
+        io.emit("orbCollision", orbData)
       }) .catch(() => null)
 
   })
