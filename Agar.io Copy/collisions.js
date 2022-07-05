@@ -37,10 +37,10 @@ export const CheckOrbCollision = (pData,pConfig, orbs, settings) => {
     });
 }
         
-export const CheckPlayerCollisions = (pData,pConfig, players) => {
+export const CheckPlayerCollisions = (pData,pConfig,players,playerId) => {
     return new Promise((resolve, reject)=>{
         players.forEach((curPlayer,i)=>{
-            if(curPlayer.uid != pData.uid){
+            if(curPlayer.socketId != playerId){
                 const pLocx = curPlayer.locX
                 const pLocy = curPlayer.locY
                 const pR = curPlayer.radius
@@ -48,10 +48,7 @@ export const CheckPlayerCollisions = (pData,pConfig, players) => {
                 && pData.locX < pLocx + pData.radius + pR
                 && pData.locY + pData.radius + pR > pLocy 
                 && pData.locY < pLocy + pData.radius + pR){
-                    distance = Math.sqrt(
-                        ((pData.locX - pLocx) * (pData.locX - pLocx)) + 
-                        ((pData.locY - pLocy) * (pData.locY - pLocy))	
-                        );      
+                    const distance = Math.sqrt((pData.locX - pLocx)**2 + (pData.locY - pLocy)**2)	
                     if(distance < pData.radius + pR){ 
                         if(pData.radius > pR){
                             let collisionData = UpdateScores(pData,curPlayer);
@@ -65,7 +62,7 @@ export const CheckPlayerCollisions = (pData,pConfig, players) => {
                             let collisionData = UpdateScores(curPlayer,pData);
                             players.forEach((p,i)=>{
                                 console.log(players[i].name, i)
-                                if (pData.uid == p.uid){
+                                if (playerId == p.socketId){
                                     players.splice(i, 1);
                                 }
                             }); 

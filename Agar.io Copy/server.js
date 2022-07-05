@@ -19,12 +19,12 @@ const expressServer = app.listen(3001, () => console.log("server running on 3001
 export const io = new Server(expressServer);
 
 const defaultSettings = {
-  orbs: 4000,
+  orbs: 1,
   speed: 5,
   size: 6,
   zoom: 1.5,
-  worldWidth: 5000,
-  worldHeight: 5000,
+  worldWidth: 100,
+  worldHeight: 100,
 }
 
 const players = []
@@ -52,11 +52,11 @@ io.on("connection", (socket) => {
 
     //30fps socket emits
     setInterval(() => {
-      io.to("game").emit('dataUpdate', {
-        players,
+      socket.emit('playerDataUpdate', {
         playerX: player.playerData.locX,
         playerY: player.playerData.locY
       })
+      io.to("game").emit('playersUpdate', {players})
     }, 33)
 
     socket.emit('initGame', {orbs})
@@ -87,7 +87,13 @@ io.on("connection", (socket) => {
           newOrb: orbs[data]
         }
         io.emit("orbCollision", orbData)
-      }) .catch(() => null)
+      }).catch(() => null)
+
+      CheckPlayerCollisions(player.playerData, player.playerConfig, players, socket.id)
+        .then((data) => {
+          console.log(players.length)
+          io.emit("playerCollision", 'temp')
+        }).catch(() => null)
 
   })
 
