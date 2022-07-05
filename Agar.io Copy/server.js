@@ -65,7 +65,7 @@ io.on("connection", (socket) => {
   socket.on("clientDataUpdate", (data) => {
     const speed = player.playerConfig.speed
     const xV = data.xV
-    const yV = data.yV
+    const yV = data.yV 
     player.playerConfig.xVector = data.xV
     player.playerConfig.yVector = data.yV
 
@@ -87,12 +87,12 @@ io.on("connection", (socket) => {
           newOrb: orbs[data]
         }
         io.emit("orbCollision", orbData)
+        socket.emit("updateScore", {score: player.playerData.score})
       }).catch(() => null)
 
       CheckPlayerCollisions(player.playerData, player.playerConfig, players, socket.id)
         .then((data) => {
-          console.log(players.length)
-          io.emit("playerCollision", 'temp')
+          socket.emit("updateScore", {score: player.playerData.score})
         }).catch(() => null)
 
   })

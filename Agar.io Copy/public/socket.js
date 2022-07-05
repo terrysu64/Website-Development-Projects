@@ -40,9 +40,9 @@ socket.on("playerDataUpdate", (data) => {
 
 socket.on("orbCollision", (data) => {
   orbs.splice(data.orbIdx,1,data.newOrb)
-  updateLeaderboard()
 })
 
-socket.on("playerCollision", (data) => {
+socket.on("updateScore", (data) => {
+  document.querySelector('.player-score').innerHTML = data.score 
   updateLeaderboard()
 })
