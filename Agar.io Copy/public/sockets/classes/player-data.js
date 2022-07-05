@@ -2,8 +2,9 @@
 
 class PlayerData {
   
-  constructor(username="terrysu64", settings) {
+  constructor(username="terrysu64", settings, socketId) {
     this.name=username
+    this.socketId = socketId
     this.locX = Math.floor(Math.random()*settings.worldWidth)
     this.locY = Math.floor(Math.random()*settings.worldHeight)
     this.radius = settings.size

@@ -17,8 +17,6 @@ const init = () => {
   updateLeaderboard()
 }
 
-
-
 socket.on('initGame', (data) => {
   orbs = data.orbs
   setInterval(() => {

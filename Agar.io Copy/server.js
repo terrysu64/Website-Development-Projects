@@ -46,7 +46,7 @@ io.on("connection", (socket) => {
   socket.on('clientInit', (data) => {
     socket.join('game')
     const playerConfig = new PlayerConfig(defaultSettings)
-    const playerData = new PlayerData(data.playerName, defaultSettings)
+    const playerData = new PlayerData(data.playerName, defaultSettings, socket.id)
     player = new Player(socket.id, playerConfig, playerData)
     players.push(playerData)
 
@@ -60,6 +60,14 @@ io.on("connection", (socket) => {
     }, 33)
 
     socket.emit('initGame', {orbs})
+  })
+
+  socket.on("disconnect", (data) => {
+    players.forEach((p,i) => {
+      if (p.socketId == socket.id) {
+        players.splice(i,1)
+      }
+    })
   })
 
   socket.on("clientDataUpdate", (data) => {
@@ -90,11 +98,10 @@ io.on("connection", (socket) => {
         socket.emit("updateScore", {score: player.playerData.score})
       }).catch(() => null)
 
-      CheckPlayerCollisions(player.playerData, player.playerConfig, players, socket.id)
-        .then((data) => {
-          socket.emit("updateScore", {score: player.playerData.score})
-        }).catch(() => null)
-
+    CheckPlayerCollisions(player.playerData, player.playerConfig, players, socket.id)
+      .then((data) => {
+        socket.emit("updateScore", {score: player.playerData.score})
+      }).catch(() => null)
+      
   })
-
 })
