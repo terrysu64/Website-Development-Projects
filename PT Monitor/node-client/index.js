@@ -6,7 +6,26 @@ import { io } from "socket.io-client"
 const socket = io("http://localhost:8888/", { transports : ['websocket'] })
 
 socket.on("connect", () => {
-  console.log("connected to server")
+
+  //auth
+  socket.emit("auth","tempnodeclientkey")
+
+  console.log("client connected to socket.io server")
+  const networkInterfaces = os.networkInterfaces()
+  
+  let macA
+  for (let key of Object.keys(networkInterfaces)) {
+    if (!networkInterfaces[key][0].internal) {
+      macA = networkInterfaces[key][0].mac
+      break
+    }
+  }
+  
+  const dataInterval = setInterval(() => {
+    getPreformance().then((data) => {
+      socket.emit("perfData",data)
+    })
+  }, 1000)
 })
 
 const getPreformance = async () => {
@@ -58,4 +77,3 @@ const getCpuLoad = () => {
   })
 }
 
-getPreformance().then((data) => console.log(data))
