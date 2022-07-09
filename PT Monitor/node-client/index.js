@@ -1,6 +1,13 @@
 //local preformace data
 
 import os from "os"
+import { io } from "socket.io-client"
+
+const socket = io("http://localhost:8888/", { transports : ['websocket'] })
+
+socket.on("connect", () => {
+  console.log("connected to server")
+})
 
 const getPreformance = async () => {
   const cpus = os.cpus()

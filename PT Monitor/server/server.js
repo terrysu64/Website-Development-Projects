@@ -8,9 +8,11 @@ import io_redis from "socket.io-redis"
 import farmhash from "farmhash"
 import path from "path"
 import { fileURLToPath } from 'url';
+import helmet from "helmet"
 
 const numProcesses = os.cpus().length
 
+//master = proxy for workers
 if (cluster.isMaster) {
 
   const workers = []
@@ -44,6 +46,7 @@ if (cluster.isMaster) {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   app.use(express.static(__dirname + '/public'));
+  app.use(helmet())
 
   const expressServer = app.listen(0, "localhost", () => console.log("worker listening"))
   const io = new Server(expressServer)
@@ -51,14 +54,14 @@ if (cluster.isMaster) {
 
   io.on('connection', (socket) => {
     console.log(`connected to worker: ${cluster.worker.id}`);
-    //socketMain(io,socket)
+    socketMain(io,socket)
   })
 
   process.on("message", (msg, connection) => {
     if (msg !== "sticky-session:connection") {
       return
     }
-    server.emit("connection", connection)
+    expressServer.emit("connection", connection)
     connection.resume()
   })
 }

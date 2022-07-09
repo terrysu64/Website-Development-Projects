@@ -1,5 +1,5 @@
 const socketMain = (temp,temp1) => {
-  return null
+  console.log('called')
 }
 
 export default socketMain
