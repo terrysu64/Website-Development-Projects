@@ -20,12 +20,21 @@ socket.on("connect", () => {
       break
     }
   }
+
+  getPreformance().then((data) => {
+    data.macA = macA
+    socket.emit("initPerfData",data)
+  })
   
   const dataInterval = setInterval(() => {
     getPreformance().then((data) => {
       socket.emit("perfData",data)
     })
   }, 1000)
+
+  socket.on("disconnect", () => {
+    clearInterval(dataInterval)
+  })
 })
 
 const getPreformance = async () => {

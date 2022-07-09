@@ -35,7 +35,7 @@ if (cluster.isMaster) {
 
   const server = net.createServer({ pauseOnConnect: true}, (connection) => {
     const worker = workers[workerIdx(connection.remoteAddress, numProcesses)]
-    worker.send('sticky-session:connection', connection)
+    worker.send('sticky-session:connection', connection) //link worker and client 
   })
   server.listen(8888)
   console.log("Primary listening on port 8888")
@@ -50,7 +50,7 @@ if (cluster.isMaster) {
 
   const expressServer = app.listen(0, "localhost", () => console.log("worker listening"))
   const io = new Server(expressServer)
-  io.adapter(io_redis({ host: 'localhost', port: 6379 }));
+  io.adapter(io_redis({ host: 'localhost', port: 6379 })); //redis adapter allows socket.io to run on multiple cores
 
   io.on('connection', (socket) => {
     console.log(`connected to worker: ${cluster.worker.id}`);
