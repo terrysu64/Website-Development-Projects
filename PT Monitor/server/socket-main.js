@@ -8,13 +8,6 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 await client.connect()
 const collection = client.db("pt-monitor").collection("clients");
 
-//test query
-const testQuery = {test : "this is working"}
-collection.find(testQuery).toArray(function(err, result) {
-  if (err) throw err;
-  console.log(result);
-});
-
 const socketMain = (io,socket) => {
 
   let macA
@@ -29,13 +22,32 @@ const socketMain = (io,socket) => {
     }
   })
 
-  socket.on("initPerfData", (data) => {
+  socket.on("initPerfData", async (data) => {
     macA = data.macA
-    //go mongo and check if its new
+    const dbResponse = await newMachine(data)
+    console.log(dbResponse)
   })
 
   socket.on("perfData", (data) => {
+    //send to frontend
     console.log(data)
+  })
+}
+
+const newMachine = (data) => {
+  return new Promise((resolve, reject) => {
+    const query = {macA: data.macA}
+    collection.findOne(query, (err,doc) => {
+      if (err) {
+        throw err
+        reject(err)
+      } else if (doc === null) {
+        collection.insertOne(data)
+        console.log('A new machine was added to the DB!')
+      } else{
+        resolve('A known machine was found in the DB!')
+      }
+    })
   })
 }
 
