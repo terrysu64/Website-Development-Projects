@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the button 1`] = `
+<button
+  id="counter"
+  onClick={[Function]}
+>
+  0
+</button>
+`;
