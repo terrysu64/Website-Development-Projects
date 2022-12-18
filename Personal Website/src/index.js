@@ -1,9 +1,8 @@
-//Date: August 13, 2021
-//Author: Terry Su
-//Purpose: A full-stack personal website to showcase my portfolio and some of my CS projects
+import initScrollReveal from "./scripts/scrollReveal";
+import initTiltEffect from "./scripts/tiltAnimation";
+import { targetElements, defaultProps } from "./data/scrollRevealConfig";
 
-import initApp from "./js/index";
-import "./style/main.scss";
+initScrollReveal(targetElements, defaultProps);
+initTiltEffect();
 
-initApp();
 

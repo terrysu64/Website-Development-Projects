@@ -1,47 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="sr">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" type="image/png" href="assets/favicon.png" />
-
     <title>All About Me</title>
+    <meta name="keywords" content="[username], [name], skill" />
+    <meta name="description" content="All About Me" />
 
-    <!-- Required librarys -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script>
-      ScrollReveal({ reset: false });
-    </script>
+    <style>
+      @import "./styles.scss";
+    </style>
+    <script
+      defer
+      src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"
+    ></script>
 
+    <!-- Todo: remove the below script once you finish your portfolio -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </head>
+
+  <!-- Todo: read the following HTML Todos to create your stunning portfolio website -->
   <body>
     <div id="top"></div>
 
     <!-- **** Hero Section **** -->
     <canvas id="gradient-canvas"></canvas>
-    <div id="hero" class="jumbotron">
-      <div class="container">
-        <h1 class="hero-title" class="load-hidden" class='glow'>
+    <section id="hero" class="jumbotron">
+        <div class="container">
+        <h1 class="hero-title load-hidden">
           Hi there! I'm <span class="text-color-main">Terry,</span>
-          <br/>a rising undergraduate<br/>passionate in the field<br/> of programming 💻😁
+          <br/>
+          a software engineering student passionate in programming 💻 🙂.
         </h1>
-        <p class="hero-cta" class="load-hidden">
+        <p class="hero-cta load-hidden">
           <a rel="noreferrer" class="cta-btn cta-btn--hero" href="#about"
             >More About Me</a
-          >
-        </p>
+        ></p>
       </div>
-    </div>
+    </section>
+
     <!-- /END Hero Section -->
 
     <!-- **** About Section **** -->
     <section id="about">
       <div class="container">
-        <h2 class="section-title">Who Am I?</h2>
+        <h2 class="section-title load-hidden">About me</h2>
         <div class="row about-wrapper">
           <div class="col-md-6 col-sm-12">
             <div class="about-wrapper__image">
@@ -52,7 +61,7 @@
                 class="img-fluid-custom rounded shadow-lg profile-pic" (make sure to change CSS carousel class for hover effect if you use this format)
                 height="auto"
                 width="300px"
-                src="assets/profile.jpeg"
+                src="assets/profile.png"
                 alt="Profile Image"
               /> -->
 
@@ -60,16 +69,16 @@
               <div class='carousel' style="width:300px; height:400px" data-simple-slider>
                 <img 
                   class="img-fluid-custom rounded shadow-lg enlarge" 
-                  src="assets/profile.jpeg" 
+                  src="assets/profile.png" 
                   alt="Profile Image"
                 />
                 <img 
-                  class="img-fluid-custom rounded shadow-lg" 
-                  src="assets/profile2.jpg" 
+                  class="img-fluid-custom rounded shadow-lg enlarge" 
+                  src="assets/profile2.png" 
                   alt="Profile Image"
                 />
                 <img 
-                  class="img-fluid-custom rounded shadow-lg" 
+                  class="img-fluid-custom rounded shadow-lg enlarge" 
                   src="assets/profile3.jpeg" 
                   alt="Profile Image"
                 />
@@ -94,20 +103,19 @@
 
             </div>
           </div>
-
           <div class="col-md-6 col-sm-12">
-            <div class="about-wrapper__info">
+            <div class="about-wrapper__info load-hidden">
               <p class="about-wrapper__info-text">
-                I'm Terry, a high school senior headed to the University of Waterloo to study software engineering. 
-                As an individual, I try to strive persistently for personal improvement both in and out of the classroom, 
-                and going into the future, my main endeavor is simply to learn more about how I can use my skills in 
-                contribution to the world around me everyday!
+                Hey guys! I'm Terry, an undergrad studying software engineering at the
+                University of Waterloo. I love enjoying and applying different strands of 
+                programming to real-life issues around our world. 
               </p>
               <p class="about-wrapper__info-text">
-                Beyond programming, I've recently taken an interest to general investing (stocks in particular) 
-                and the realm of blockchain. As hobbies, I enjoy playing all sorts of sports and activities — such as fishing,
-                skiing, hiking, basketball, etc. — during my spar time with friends and family. 
-                Finally, I'm a major anime fan who often finds himself binging entire shows in one sitting by accident 😅. 
+                Beyond programming, I've recently taken an interest to general investing 
+                and the realm of blockchain. As hobbies, I enjoy practicing all sorts of sports 
+                and activities — such as fishing, skiing, road biking, basketball, etc. — 
+                during my spare time. Finally, I'm a big anime/manga fan who often finds 
+                himself binge reading entire seires in one sitting 😅. 
                 Feel free to hit me up with any of your recommendations! 
               </p>
               <span class="d-flex mt-3">
@@ -115,7 +123,7 @@
                   rel="noreferrer"
                   target="_blank"
                   class="cta-btn cta-btn--resume"
-                  href=""
+                  href="assets/resume.pdf"
                 >
                   View Resume
                 </a>
@@ -131,7 +139,7 @@
     <section id="projects">
       <div class="container">
         <div class="project-wrapper">
-          <h2 class="section-title dark-blue-text">Some Of My Projects</h2>
+          <h2 class="section-title dark-blue-text">Projects</h2>
 
           <!-- Each .row is a project -->
           <div class="row">
@@ -140,7 +148,7 @@
                 <h3 class="project-wrapper__text-title">GoodEats</h3>
                 <div>
                   <p class="mb-4">
-                    As an avid gastronome, GoodEats was built out of my passion for exploring new foods to potentially try from various cultures. Users can easily surf, and keep track of, their favourite restaurants from corners of the world without feeling any obligation to make a purchase. On the technical side, GoodEats was built with React Native and Firebase; most features of the app were facilitated with packages from the Expo toolchain. However, as most restaurant data is currently sourced artificially, I hope to scale GoodEats and make use of the Yelp Fusion API in the near future! 
+                    As an avid gastronome, GoodEats was built out of my passion for exploring new foods around me. Users can easily surf, and keep track of, their favourite restaurants from corners of the world without feeling any obligation to make a purchase. On the technical side, GoodEats was built with React Native and Firebase; most features of the app were facilitated with packages from the Expo toolchain. However, as most restaurant data is currently sourced artificially, I hope to scale GoodEats and make use of the Yelp Fusion API in the near future! 
                   </p>
                 </div>
                 <a
@@ -212,46 +220,6 @@
                     src="assets/discord.v1.jpg"
                   />
                 </div>
-              </div>
-            </div>
-          </div>
-          <!-- /END Project -->
-
-          <!-- Each .row is a project -->
-          <div class="row">
-            <div class="col-lg-4 col-sm-12">
-              <div class="project-wrapper__text">
-                <h3 class="project-wrapper__text-title">PearPals</h3>
-                <div>
-                  <p class="mb-4">
-                    PearPals is an entrepreneurial startup that I co-founded with my friends; our service is dedicated to connecting students in order to foster practical yet impactful cross-cultural exchanges! Through using our platform, you will be able to easily network with our users — that come from all over the world — and learn from their unique backgrounds and experiences!
-                  </p>
-
-                  <p class="mb-4">
-                    Recently, using Bubble.io, I migrated the service to a fully-functional website. This process entailed the application of a variety of full-stack development concepts such as UI responsiveness, UX design/workflow, and managing back-end databases. 
-                  </p>
-                </div>
-                <a
-                  rel="noreferrer"
-                  target="_blank"
-                  class="cta-btn cta-btn--hero"
-                  href="https://pearpals.bubbleapps.io/version-test?"
-                >
-                  See Live
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-8 col-sm-12">
-              <div class="project-wrapper__image">
-                <a rel="noreferrer" target="_blank">
-                  <div data-tilt class="thumbnail rounded js-tilt">
-                    <img
-                      alt="Project Image"
-                      class="img-fluid-custom"
-                      src="assets/pearpals.png"
-                    />
-                  </div>
-                </a>
               </div>
             </div>
           </div>
@@ -389,13 +357,15 @@
           <!-- /END Project -->
 
 
-        <div class='project-conc github'>
-          <img alt='github' src='./assets/github.png' height=30px width=30px/>
-          <div>
-                <a rel="noreferrer" href='https://github.com/terrysu64'><h2>And many more to be found on my GitHub</h2></a>
+          <div class='project-conc github'>
+            <img alt='github' src='./assets/github.png' height=30px width=30px/>
+            <div>
+                  <a rel="noreferrer" href='https://github.com/terrysu64'><h2>And many more to be found on my GitHub</h2></a>
+            </div>
+            <img alt='github' src='./assets/github.png' height=30px width=30px/>
           </div>
-          <img alt='github' src='./assets/github.png' height=30px width=30px/>
-        </div>
+
+
         </div>
       </div>
     </section>
@@ -405,13 +375,13 @@
     <section id="contact">
       <div class="container">
         <h2 class="section-title">Contact</h2>
-        <div class="contact-wrapper">
-          <p class="contact-wrapper__text"><u>Email:</u> limacechan2169@gmail.com</p>
+        <div class="contact-wrapper load-hidden">
+          <p class="contact-wrapper__text"><u>Email:</u> terry.su@uwaterloo.ca</p>
           <a
             rel="noreferrer"
             target="_blank"
             class="cta-btn cta-btn--resume"
-            href="mailto:limacechan2169@gmail.com"
+            href="mailto:terry.su@uwaterloo.ca"
             >Send Email</a
           >
         </div>
@@ -426,23 +396,31 @@
           <i class="fa fa-angle-up fa-2x" aria-hidden="true"></i>
         </a>
         <div class="social-links">
+          <a rel="noreferrer" href="https://leetcode.com/terrysu64/" target="_blank">
+            <i class="fa fa-code fa-inverse"></i>
+          </a>
           <a rel="noreferrer" href="https://www.linkedin.com/in/terry-su-a51406218/" target="_blank">
             <i class="fa fa-linkedin fa-inverse"></i>
           </a>
           <a rel="noreferrer" href="https://github.com/terrysu64" target="_blank">
             <i class="fa fa-github fa-inverse"></i>
           </a>
-          <a rel="noreferrer" href="https://leetcode.com/terrysu64/" target="_blank">
-            <i class="fa fa-code fa-inverse"></i>
-          </a>
-        </div><br>
-        <u><a
-          rel="noreferrer"
-          href="https://github.com/terrysu64/Website-Development-Projects/tree/main/Personal%20Website">
-          Check Out How I Built This Website (Source Code)
-        </a></u>
+        </div>
+
+        <hr />
+
+        <!-- Notice: if you want to give me some credit, it will be huge for me! if not, put your data on it -->
+        <p class="footer__text">
+          <a rel="noreferrer" href="https://github.com/terrysu64/Website-Development-Projects/tree/main/Personal%20Website" target="_blank"
+            >Feel Free To Check Out The Source Code</a
+          >
+        </p>
+
+        
+      </div>
     </footer>
     <!-- /END Footer Section -->
-  </body> 
-  <script src="js/waveGradient.js"></script>
+    <script defer type="module" src="scripts/wave.js"></script>
+    <script defer type="module" src="index.js"></script>
+  </body>
 </html>
