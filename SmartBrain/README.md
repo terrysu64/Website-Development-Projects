@@ -1,4 +1,49 @@
-# Getting Started with Create React App
+<h1>SmartBrain 🧠</h1> 
+
+<h3>Tech Stack</h3>
+<div>
+<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React.js">
+<img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
+<img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white" alt="Heroku">
+<img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js">
+<img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="express">
+ </div>
+ 
+## Setup
+1. Install Project and Dependencies
+```bash
+$ git clone https://github.com/terrysu64/Website-Development-Projects
+$ cd ./Website-Development-Projects/SmartBrain
+$ npm install
+$ npm start
+```
+
+2. Add Custom API Key (`App.js`)
+
+```javascript
+const app = new Clarifai.App({
+ apiKey: 'YOUR_API_KEY'
+});
+```
+
+3. Connect to Local Database and Begin Developing!
+```javascript
+const db = knex({
+  client: 'pg',
+  connection: {
+    connectionString : DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  }
+});
+```
+ 
+<h3>Issues and Updates</h3>
+
+- Feel free to create PRs and raise relevant issues in the repo!
+
+# Extra Technical Details
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
