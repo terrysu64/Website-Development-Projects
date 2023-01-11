@@ -1,4 +1,6 @@
-<h1>SmartBrain 🧠</h1> 
+<h1>SmartBrain 🧠</h1>
+
+Server/API: https://github.com/terrysu64/Website-Development-Projects/tree/main/SmartBrain-API
 
 <h3>Tech Stack</h3>
 <div>
